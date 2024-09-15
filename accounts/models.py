@@ -3,18 +3,22 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from phonenumber_field.modelfields import PhoneNumberField
 
 class UserAccountManager(BaseUserManager):
-    def create_user(self, firstName, lastName, phone, profilePicture, password=None):
+    def create_user(self, firstName, lastName, phone, email, profilePicture, password=None):
         if not phone:
             raise ValueError('Users must have a phone number')
+        
+        if not email:
+            raise ValueError('Users must have a email address')
+        
 
-        user = self.model(firstName=firstName,  lastName=lastName, phone=phone, profilePicture=profilePicture)
+        user = self.model(firstName=firstName,  lastName=lastName, phone=phone, email=email, profilePicture=profilePicture)
 
         user.set_password(password)
         user.save(using=self._db)
         return user
     
-    def create_super_user(self, firstName, lastName, phone, profilePicture, password=None):
-        user = self.create_user(firstName, lastName, phone, profilePicture, password)
+    def create_super_user(self, firstName, lastName, phone, email, profilePicture, password=None):
+        user = self.create_user(firstName, lastName, phone, email, profilePicture, password)
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
