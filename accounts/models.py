@@ -25,7 +25,7 @@ class UserAccount (AbstractBaseUser, PermissionsMixin):
     firstName = models.CharField(max_length=255)
     lastName = models.CharField(max_length=255)
     phone = PhoneNumberField(unique=True, null=False, blank=False)
-    profilePicture = models.ImageField(upload_to="profile_pics/")
+    profilePicture = models.ImageField(upload_to="profile_pics", default="profile_pics/default_profile.png")
 
     objects = UserAccountManager()
     
