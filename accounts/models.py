@@ -20,10 +20,10 @@ class UserAccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-# The class `UserAccount` inherits from `AbstractBaseUser` and `PermissionsMixin` in Python.
 class UserAccount (AbstractBaseUser, PermissionsMixin):
     firstName = models.CharField(max_length=255)
     lastName = models.CharField(max_length=255)
+    email = models.EmailField()
     phone = PhoneNumberField(unique=True, null=False, blank=False)
     profilePicture = models.ImageField(upload_to="profile_pics", default="profile_pics/default_profile.png")
 
