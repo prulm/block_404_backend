@@ -3,26 +3,26 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from phonenumber_field.modelfields import PhoneNumberField
 
 class UserAccountManager(BaseUserManager):
-    def create_user(self, firstName, lastName, phone, email, profilePicture, password=None):
+    def create_user(self, firstName, lastName, phone, email, password=None):
         if not phone:
             raise ValueError('Users must have a phone number')
         
         if not email:
-            raise ValueError('Users must have a email address')
+            raise ValueError('Users must have an email address')
         
         email = self.normalize_email(email)
     
-        user = self.model(firstName=firstName,  lastName=lastName, phone=phone, email=email, profilePicture=profilePicture)
+        user = self.model(firstName=firstName, lastName=lastName, email=email, phone=phone)
 
         user.set_password(password)
-        user.save(using=self._db)
+        user.save()
         return user
     
-    def create_super_user(self, firstName, lastName, phone, email, profilePicture, password=None):
-        user = self.create_user(firstName, lastName, phone, email, profilePicture, password)
+    def create_superuser(self, firstName, lastName, phone, email, password=None):
+        user = self.create_user(firstName, lastName, phone, email, password)
         user.is_staff = True
         user.is_superuser = True
-        user.save(using=self._db)
+        user.save()
         return user
 
 class UserAccount (AbstractBaseUser, PermissionsMixin):
@@ -35,7 +35,7 @@ class UserAccount (AbstractBaseUser, PermissionsMixin):
     objects = UserAccountManager()
     
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ['firstName', 'lastName']
+    REQUIRED_FIELDS = ['firstName', 'lastName', 'email']
 
     def get_full_name(self):
         return self.firstName + self.lastName
