@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'phonenumber_field',
     'accounts',
+    'buildings',
+    'committees',
 ]
 
 MIDDLEWARE = [
