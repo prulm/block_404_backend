@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from phonenumber_field.modelfields import PhoneNumberField
 
 class UserAccountManager(BaseUserManager):
-    def create_user(self, firstName, lastName, phone, email, password=None):
+    def create_user(self, firstName, lastName, email, phone, password=None):
         if not phone:
             raise ValueError('Users must have a phone number')
         
@@ -18,8 +18,8 @@ class UserAccountManager(BaseUserManager):
         user.save()
         return user
     
-    def create_superuser(self, firstName, lastName, phone, email, password=None):
-        user = self.create_user(firstName, lastName, phone, email, password)
+    def create_superuser(self, firstName, lastName, email,  phone,password=None):
+        user = self.create_user(firstName, lastName, email, phone, password)
         user.is_staff = True
         user.is_superuser = True
         user.save()
@@ -31,6 +31,7 @@ class UserAccount (AbstractBaseUser, PermissionsMixin):
     email = models.EmailField()
     phone = PhoneNumberField(unique=True, null=False, blank=False)
     profilePicture = models.ImageField(upload_to="profile_pics", default="profile_pics/default_profile.png")
+    is_active = models.BooleanField(default=False)
 
     objects = UserAccountManager()
     
