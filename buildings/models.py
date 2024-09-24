@@ -10,3 +10,7 @@ class Building(models.Model):
 class Attachment(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     file = models.FileField(upload_to='attachments/')
+
+class Picture(models.Model):
+    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to="building_pictures")
