@@ -20,11 +20,11 @@ class Building(TimeStampedModel):
     def houses(self):
         return self.housesPerFloor * self.floors
 
-class Attachment(TimeStampedModel):
+class BuildingAttachment(TimeStampedModel):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     file = models.FileField(upload_to=f'building/{building}/attachments/')
 
-class Picture(TimeStampedModel):
+class BuildingPicture(TimeStampedModel):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to=f"building/{building}/pictures/")
 
@@ -37,8 +37,16 @@ class Event(TimeStampedModel):
     attachment = models.FileField(upload_to=f'building/{building}/events/attachments/')
 
 class Payment(TimeStampedModel):
+
+    class PaymentTypes(models.TextChoices):
+        Penality = 'Penality', 'PENALITY'
+        Power = 'Power', 'POWER'
+        Water = 'Water', 'WATER'
+        Other = 'Other', 'OTHER'
+
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     collector = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    type = models.CharField(max_length=50, choices=PaymentTypes.choices, default=PaymentTypes.Other)
     name = models.CharField(max_length=255)
     description = models.TextField()
     deadline = models.DateTimeField()
