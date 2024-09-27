@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import UserAccount
 import houses
 
 class TimeStampedModel(models.Model):
@@ -31,7 +32,17 @@ class Event(TimeStampedModel):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    penality = models.DecimalField(max_digits=10, decimal_places=2)
     commences = models.DateTimeField()
+    penality = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     attachment = models.FileField(upload_to=f'building/{building}/events/attachments/')
 
+class Payment(TimeStampedModel):
+    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+    collector = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    deadline = models.DateTimeField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    isRecurring = models.BooleanField(default=False)
+    penality = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    attachment = models.FileField(upload_to=f'building/{building}/payments/attachments/')
