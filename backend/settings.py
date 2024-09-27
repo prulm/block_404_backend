@@ -151,6 +151,9 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
 }
 
+SITE_NAME = "Block404.com"
+DEFAULT_FROM_EMAIL = os.getenv("DJANGO_EMAIL_FROM")
+
 DJOSER = {
     'LOGIN_FIELD': 'phone',
     'USER_CREATE_PASSWORD_RETYPE': True,
@@ -158,6 +161,9 @@ DJOSER = {
     'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
+    'EMAIL': {
+        'activation': 'accounts.email.ActivationEmail',
+    },
     'SEND_COMFIRMATION_EMAIL': True,
     'SERIALIZERS': {
         'user_create': 'accounts.serializers.UserCreateSerializer',
