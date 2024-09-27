@@ -21,15 +21,15 @@ class Building(TimeStampedModel):
         return self.housesPerFloor * self.floors
 
 class BuildingAttachment(TimeStampedModel):
-    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='attachments')
     file = models.FileField(upload_to=f'building/{building}/attachments/')
 
 class BuildingPicture(TimeStampedModel):
-    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='pictures')
     picture = models.ImageField(upload_to=f"building/{building}/pictures/")
 
 class Event(TimeStampedModel):
-    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='events')
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     commences = models.DateTimeField()
@@ -59,3 +59,4 @@ class Penality(TimeStampedModel):
     reason = models.TextField()
     amount = models.IntegerField()
     is_paid = models.BooleanField(default=False)
+# to-do: add a pivot table to connect penality with user
