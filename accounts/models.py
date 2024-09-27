@@ -32,6 +32,7 @@ class UserAccount (AbstractBaseUser, PermissionsMixin):
     phone = PhoneNumberField(unique=True, null=False, blank=False)
     profilePicture = models.ImageField(upload_to="profile_pics", default="profile_pics/default_profile.png")
     is_active = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
 
     objects = UserAccountManager()
     
@@ -45,4 +46,7 @@ class UserAccount (AbstractBaseUser, PermissionsMixin):
         return self.firstName
 
     def __str__(self):
-        return self.phone
+        return str(self.phone)
+    
+    class Meta():
+        ordering = ['id']
