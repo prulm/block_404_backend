@@ -5,6 +5,7 @@ class BuildingSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Building
+        fields = '__all__'
 
 class AttachmentsSerializer(serializers.ModelSerializer):
     class Meta:
