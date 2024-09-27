@@ -12,13 +12,13 @@ class TimeStampedModel(models.Model):
 class Building(TimeStampedModel):
     name = models.CharField(unique=True, max_length=255)
     description = models.TextField(blank=True, null=True)
-    houses = models.IntegerField()
+    housesPerFloor = models.IntegerField()
     floors = models.IntegerField()
     address = models.CharField(max_length=255)
 
     @property
     def houses(self):
-        pass
+        return self.housesPerFloor * self.floors
 
 class Attachment(TimeStampedModel):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
