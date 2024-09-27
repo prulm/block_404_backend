@@ -39,7 +39,6 @@ class Event(TimeStampedModel):
 class Payment(TimeStampedModel):
 
     class PaymentTypes(models.TextChoices):
-        Penality = 'Penality', 'PENALITY'
         Power = 'Power', 'POWER'
         Water = 'Water', 'WATER'
         Other = 'Other', 'OTHER'
@@ -54,3 +53,9 @@ class Payment(TimeStampedModel):
     isRecurring = models.BooleanField(default=False)
     penality = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     attachment = models.FileField(upload_to=f'building/{building}/payments/attachments/')
+
+class Penality(TimeStampedModel):
+    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+    reason = models.TextField()
+    amount = models.IntegerField()
+    is_paid = models.BooleanField(default=False)
