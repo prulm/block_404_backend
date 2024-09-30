@@ -1,3 +1,11 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+class BuildingAdmin(admin.ModelAdmin):
+	list_display = ('id', 'name', 'description', 'housesPerFloor', 'floors', 'address')
+	list_display_links = ('id', 'name')
+	search_fields = ('name', 'address')
+	list_per_page = 25
+	sortable_by = 'id'
+
+admin.site.register(Building, BuildingAdmin)
