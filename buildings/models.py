@@ -59,4 +59,3 @@ class Penality(TimeStampedModel):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     reason = models.TextField()
     amount = models.IntegerField()
-

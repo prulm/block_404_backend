@@ -38,3 +38,7 @@ class HousePenality(TimeStampedModel):
     penality = models.ForeignKey(Penality, on_delete=models.CASCADE)
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name="penalities")
     is_paid = models.BooleanField(default=False)
+
+class PaymentStatus(TimeStampedModel):
+    payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
+    house = models.ForeignKey(House, on_delete====)
