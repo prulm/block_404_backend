@@ -1,7 +1,6 @@
 from django.db import models
 from datetime import datetime
 from accounts.models import UserAccount
-import houses
 
 class TimeStampedModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -60,5 +59,4 @@ class Penality(TimeStampedModel):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     reason = models.TextField()
     amount = models.IntegerField()
-    is_paid = models.BooleanField(default=False)
-# to-do: add a pivot table to connect penality with user
+

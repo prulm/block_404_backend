@@ -1,6 +1,6 @@
 from django.db import models
 from accounts.models import UserAccount
-from buildings.models import Building, TimeStampedModel
+from buildings.models import Building, Penality, TimeStampedModel
 
 class House(TimeStampedModel):
 
@@ -20,11 +20,11 @@ class House(TimeStampedModel):
     class Meta:
         unique_together = ("building", "floor", "floorCode")
 
-class HouseAttachments(TimeStampedModel):
+class HouseAttachment(TimeStampedModel):
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name='house_attachments')
     file = models.FileField(upload_to=f'house/{house}/attachments/')
 
-class HousePictures(TimeStampedModel):
+class HousePicture(TimeStampedModel):
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name="house_pictures")
     picture = models.ImageField(upload_to=f'house/{house}/pictures/')
 
@@ -33,3 +33,8 @@ class Resident(TimeStampedModel):
     resident = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="residences")
     isHead = models.BooleanField(default=False)
     isOwner = models.BooleanField(default=False)
+
+class HousePenality(TimeStampedModel):
+    penality = models.ForeignKey(Penality, on_delete=models.CASCADE)
+    house = models.ForeignKey(House, on_delete=models.CASCADE, related_name="penalities")
+    is_paid = models.BooleanField(default=False)
