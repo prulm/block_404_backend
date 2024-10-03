@@ -39,7 +39,7 @@ class HousePaymentAdmin(admin.ModelAdmin):
 class HousePenalityAdmin(admin.ModelAdmin):
     list_display = ('id', 'house', 'penality', 'is_paid')
     list_display_links = ('id', 'house')
-    search_fields = ('house__owner__firstName', 'house__owner__lastName', 'house__floorCode', 'house__description', 'house__building__name', 'penality__name', 'is_paid')
+    search_fields = ('house__owner__firstName', 'house__owner__lastName', 'house__floorCode', 'house__description', 'house__building__name', 'penality__reason', 'is_paid')
     list_per_page = 25
     sortable_by = 'id'
 

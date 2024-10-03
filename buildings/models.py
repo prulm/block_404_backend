@@ -57,6 +57,6 @@ class Payment(TimeStampedModel):
     attachment = models.FileField(upload_to=f'building/{building.name}/payments/attachments/')
 
 class Penality(TimeStampedModel):
-    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='penalities')
     reason = models.TextField()
     amount = models.IntegerField()
