@@ -12,3 +12,15 @@ class Members(TimeStampedModel):
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="members")
     user = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     position = models.CharField(max_length=100, default="Member")
+
+class Rule(TimeStampedModel):
+    committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="rules")
+    rule = models.TextField()
+    order = models.IntegerField()
+    picture = models.ImageField(upload_to=f"committees/{committee.name}/rules/pictures/")
+
+class Report(TimeStampedModel):
+    committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="reports")
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    file = models.FileField(upload_to=f"committees/{committee.name}/reports/")
