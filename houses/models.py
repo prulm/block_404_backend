@@ -8,6 +8,8 @@ class House(TimeStampedModel):
         Unoccupied  = "Unoccupied", "UNOCCUPIED"
         Owner_Resided = "Owner Resided", "OWNER RESIDED"
         Rented = "Rented", "RENTED"
+        For_Sale = "For Sale", "FOR SALE"
+        For_Rent = "For Rent", "FOR RENT"
 
     owner = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="my_houses")
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name="building_houses")
@@ -44,6 +46,7 @@ class HousePenality(TimeStampedModel):
 class HousePayment(TimeStampedModel):
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name="payments")
+    paid_by = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="completed_payments")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     
     @property
