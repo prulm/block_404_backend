@@ -52,6 +52,7 @@ class Payment(TimeStampedModel):
     deadline = models.DateTimeField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     isRecurring = models.BooleanField(default=False)
+    recurrence_period = models.IntegerField(null=True, blank=True)
     penality = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     attachment = models.FileField(upload_to=f'building/{building.name}/payments/attachments/')
 
