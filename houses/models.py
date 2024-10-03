@@ -43,23 +43,17 @@ class HousePenality(TimeStampedModel):
 class HousePayment(TimeStampedModel):
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name="payments")
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
     
     @property
     def total_paid(self):
-        return self.installments.aggregate(total=models.Sum('amount'))['total'] or 0
+        return self.aggregate(total=models.Sum('amount'))['total'] or 0
 
     @property
     def payment_progress(self):
-        if self.payment.amount_due == 0:
+        if self.payment.amount == 0:
             return 100
-        return (self.total_paid / self.payment.amount_due) * 100
+        return (self.total_paid / self.payment.amount) * 100
 
     def __str__(self):
         return f"Payment for {self.house} on {self.payment.deadline}: {'Paid' if self.payment_progress == 100 else 'Not Paid'}"
-
-class Installment(TimeStampedModel):
-    payment = models.ForeignKey(HousePayment, related_name='installments', on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def __str__(self):
-        return f"Installment of {self.amount} on {self.date_paid}"
