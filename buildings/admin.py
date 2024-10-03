@@ -25,14 +25,14 @@ class BuildingPictureAdmin(admin.ModelAdmin):
 class EventAdmin(admin.ModelAdmin):
 	list_display = ('id', 'building', 'creator', 'name', 'description', 'commences', 'penality', 'attachment')
 	list_display_links = ('id', 'building', 'name', 'creator')
-	search_fields = ('building__name', 'creator__firstName', 'name')
+	search_fields = ('building__name', 'creator__firstName', 'creator__lastName', 'name')
 	list_per_page = 25
 	sortable_by = 'id'
 
 class PaymentAdmin(admin.ModelAdmin):
 	list_display = ('id', 'name', 'description', 'building', 'collector', 'type', 'deadline', 'amount', 'isRecurring', 'recurrence_period', 'penality', 'attachment')
 	list_display_links = ('id', 'building', 'name', 'collector')
-	search_fields = ('building__name', 'collector__firstName', 'name')
+	search_fields = ('building__name', 'collector__firstName', 'collector__lastName', 'name')
 	list_per_page = 25
 	sortable_by = 'id'
 

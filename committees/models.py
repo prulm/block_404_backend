@@ -8,7 +8,7 @@ class Committee(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
 
-class Members(TimeStampedModel):
+class Member(TimeStampedModel):
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="members")
     user = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     position = models.CharField(max_length=100, default="Member")
