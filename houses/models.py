@@ -15,6 +15,7 @@ class House(TimeStampedModel):
     floor = models.IntegerField()
     floorCode = models.CharField(max_length=10)
     bedrooms = models.IntegerField()
+    squareMeter = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(choices=StatusChoices, default=StatusChoices.Unoccupied, max_length=50)
 
     class Meta:
