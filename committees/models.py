@@ -25,12 +25,12 @@ class Report(TimeStampedModel):
     description = models.TextField()
     file = models.FileField(upload_to=f"committees/{committee.name}/reports/")
 
-class CommitteeAttachments(TimeStampedModel):
+class CommitteeAttachment(TimeStampedModel):
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="committee_attachments")
     file = models.FileField(upload_to=f"committees/{committee.name}/attachments/")
     description = models.TextField(blank=True, null=True)
 
-class CommitteePictures(TimeStampedModel):
+class CommitteePicture(TimeStampedModel):
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="committee_pictures")
     picture = models.ImageField(upload_to=f"committees/{committee.name}/pictures/")
     description = models.TextField(blank=True, null=True)

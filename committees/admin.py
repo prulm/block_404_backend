@@ -1,4 +1,5 @@
 from django.contrib import admin
+from committees.models import *
 
 class CommitteeAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'description', 'building')
@@ -28,17 +29,24 @@ class ReportAdmin(admin.ModelAdmin):
     list_per_page = 25
     sortable_by = 'id'
 
-class CommitteeAttachmentModel(admin.ModelAdmin):
-    list_display = ('id', 'committee', 'attachment')
+class CommitteeAttachmentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'committee', 'file')
     list_display_links = ('id', 'committee')
     search_fields = ('committee__name', )
     list_per_page = 25
     sortable_by = 'id'
 
-class CommitteePictureModel(admin.ModelAdmin):
+class CommitteePictureAdmin(admin.ModelAdmin):
     list_display = ('id', 'committee', 'picture')
     list_display_links = ('id', 'committee')
     search_fields = ('committee__name', )
     list_per_page = 25
     sortable_by = 'id'
+
+admin.site.register(Committee,  CommitteeAdmin)
+admin.site.register(Member, MembersAdmin)
+admin.site.register(Rule, RuleAdmin)
+admin.site.register(Report, ReportAdmin)
+admin.site.register(CommitteeAttachment, CommitteeAttachmentAdmin)
+admin.site.register(CommitteePicture, CommitteePictureAdmin)
 
