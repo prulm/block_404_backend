@@ -17,7 +17,7 @@ class Rule(TimeStampedModel):
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="rules")
     rule = models.TextField()
     order = models.IntegerField()
-    picture = models.ImageField(upload_to=f"committees/{committee.name}/rules/pictures/")
+    picture = models.ImageField(upload_to=f"committees/{committee.name}/rules/pictures/", blank=True, null=True)
 
 class Report(TimeStampedModel):
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="reports")
@@ -34,4 +34,3 @@ class CommitteePictures(TimeStampedModel):
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="committee_pictures")
     picture = models.ImageField(upload_to=f"committees/{committee.name}/pictures/")
     description = models.TextField(blank=True, null=True)
-    
