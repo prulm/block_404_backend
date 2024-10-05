@@ -28,13 +28,18 @@ class BuildingPicture(TimeStampedModel):
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='pictures')
     picture = models.ImageField(upload_to=f"building/{building.name}/pictures/")
 
+class Penality(TimeStampedModel):
+    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='penalities')
+    reason = models.TextField()
+    amount = models.IntegerField()
+
 class Event(TimeStampedModel):
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='events')
     creator = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     commences = models.DateTimeField()
-    penality = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    penality = models.ForeignKey(Penality, on_delete=models.CASCADE, null=True, blank=True)
     attachment = models.FileField(upload_to=f'building/{building.name}/events/attachments/')
 
 class Payment(TimeStampedModel):
@@ -53,10 +58,5 @@ class Payment(TimeStampedModel):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     isRecurring = models.BooleanField(default=False)
     recurrence_period = models.IntegerField(null=True, blank=True)
-    penality = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    penality = models.ForeignKey(Penality, on_delete=models.CASCADE, null=True, blank=True)
     attachment = models.FileField(upload_to=f'building/{building.name}/payments/attachments/')
-
-class Penality(TimeStampedModel):
-    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='penalities')
-    reason = models.TextField()
-    amount = models.IntegerField()

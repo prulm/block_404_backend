@@ -1,7 +1,14 @@
 from django.db import models
 from accounts.models import UserAccount
-from buildings.models import Building, TimeStampedModel
+from buildings.models import Building
+from houses.models import Resident
 
+class TimeStampedModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
 
 class Committee(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
@@ -10,7 +17,7 @@ class Committee(models.Model):
 
 class Member(TimeStampedModel):
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="members")
-    user = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    user = models.ForeignKey(Resident, on_delete=models.CASCADE)
     position = models.CharField(max_length=100, default="Member")
 
 class Rule(TimeStampedModel):
