@@ -11,7 +11,7 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 class Committee(models.Model):
-    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='committee')
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
 

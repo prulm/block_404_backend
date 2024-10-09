@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from committees.serializers import CommitteeSerializer
+from houses.serializers import HouseSerializer
 from .models import *
 
 class BuildingSerializer(serializers.ModelSerializer):
@@ -8,12 +10,18 @@ class BuildingSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AttachmentsSerializer(serializers.ModelSerializer):
+    file = serializers.FileField(use_url=True)
+
     class Meta:
         model = BuildingAttachment
+        fields = ('id', 'file')
 
 class PicturesSerializer(serializers.ModelSerializer):
+    picture = serializers.ImageField(use_url=True)
+
     class Meta:
-        model = BuildingAttachment
+        model = BuildingPicture
+        fields = ('id', 'picture')
 
 class PaymentSerializer(serializers.ModelSerializer):
     pass
@@ -22,6 +30,9 @@ class PaymentSerializer(serializers.ModelSerializer):
 
 class BuildingDetailSerializer(serializers.ModelSerializer):
     pictures = PicturesSerializer(many=True)
+    attachments =  AttachmentsSerializer(many=True)
+    committee = CommitteeSerializer()
+    houses = HouseSerializer(many=True)
 
     class Meta(BuildingSerializer.Meta):
-        pass
+        fields = ('id', 'name', 'description', 'housesPerFloor', 'floors', 'address', 'attachments', 'pictures', 'committee', 'houses')
