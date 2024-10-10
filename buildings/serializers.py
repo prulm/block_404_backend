@@ -10,23 +10,17 @@ class BuildingSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AttachmentsSerializer(serializers.ModelSerializer):
-    file = serializers.FileField(use_url=True)
-
     class Meta:
         model = BuildingAttachment
         fields = ('id', 'file')
 
 class PicturesSerializer(serializers.ModelSerializer):
-    picture = serializers.ImageField(use_url=True)
-
     class Meta:
         model = BuildingPicture
         fields = ('id', 'picture')
 
 class PaymentSerializer(serializers.ModelSerializer):
     pass
-
-# to-do:    - create house model
 
 class BuildingDetailSerializer(serializers.ModelSerializer):
     pictures = PicturesSerializer(many=True)
