@@ -26,7 +26,12 @@ class BuildingDetailSerializer(serializers.ModelSerializer):
     pictures = PicturesSerializer(many=True)
     attachments =  AttachmentsSerializer(many=True)
     committee = CommitteeSerializer()
-    houses = HouseSerializer(many=True)
+    houses = serializers.SerializerMethodField()
 
     class Meta(BuildingSerializer.Meta):
         fields = ('id', 'name', 'description', 'housesPerFloor', 'floors', 'address', 'attachments', 'pictures', 'committee', 'houses')
+    
+    def get_houses(self, obj):
+        user = self.context['request'].user
+        user_houses = obj.houses.filter(models.Q(owner=user) | models.Q(residents=user))
+        return HouseSerializer(user_houses, many=True).data
