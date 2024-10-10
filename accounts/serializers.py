@@ -12,4 +12,4 @@ class UserCreateSerializer(UserCreateSerializer):
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        exclude = ["password"]
+        exclude = ["password", "groups", "user_permissions", "last_login"]
