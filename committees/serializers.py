@@ -4,7 +4,7 @@ from .models import *
 class CommitteeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Committee
-        exclude = ['building', 'description']
+        exclude = ['building']
 
 class CreateCommitteeSerializer(serializers.ModelSerializer):
 
