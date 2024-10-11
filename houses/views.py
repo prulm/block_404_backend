@@ -23,3 +23,11 @@ class ResidentAddView(CreateAPIView):
 class ResidentActivateView(UpdateAPIView):
     permission_classes = (permissions.IsAdminUser, )
     serializer_class = ResidentCreateSerializer
+    queryset = Resident.objects.all()
+
+class ResidentRegisterView(CreateAPIView):
+    permission_classes = (permissions.IsAuthenticated, )
+    serializer_class = ResidentCreateSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(resident=self.request.user)
