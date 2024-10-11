@@ -21,17 +21,6 @@ class ResidentAddView(CreateAPIView):
     permission_classes = (permissions.IsAdminUser, )
     serializer_class = ResidentCreateSerializer
 
-    def create(self, request, *args, **kwargs):
-         try:
-             return super().create(request, *args, **kwargs)
-         except IntegrityError as err:
-             if 'unique constraint' in str(err):
-                return Response(
-                    {'Error': 'Each resident should be unique to a house.'},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-             else:
-                raise IntegrityError(err)
 
 class ResidentActivateView(UpdateAPIView):
     permission_classes = (permissions.IsAdminUser, )

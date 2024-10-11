@@ -1,10 +1,42 @@
 from rest_framework import serializers
+from accounts.serializers import CustomUserSerializer
 from .models import *
 
+class MemberSerializer(serializers.ModelSerializer):
+    user = CustomUserSerializer()
+    class Meta:
+        model = Member
+        fields = ('id', 'user', 'position')
+
+class RuleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rule
+        exclude = ['committee']
+
+class ReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Report
+        exclude = ['committee']
+
+class AttachmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommitteeAttachment
+        exclude = ['committee']
+
+class PictureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommitteePicture
+        exclude = ['committee']
+
 class CommitteeSerializer(serializers.ModelSerializer):
+    members = MemberSerializer(many=True)
+    rules = RuleSerializer(many=True)
+    reports = ReportSerializer(many=True)
+    committee_attachments = AttachmentSerializer(many=True)
+    committee_pictures = PictureSerializer(many=True)
     class Meta:
         model = Committee
-        exclude = ['building']
+        fields = ('id', 'name', 'description', 'members', 'rules', 'reports', 'committee_attachments', 'committee_pictures')
 
 class CreateCommitteeSerializer(serializers.ModelSerializer):
 
