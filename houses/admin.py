@@ -23,9 +23,9 @@ class HousePictureAdmin(admin.ModelAdmin):
     sortable_by = 'id'
 
 class ResidentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'house', 'resident', 'isOwner', 'isHead', 'isActive')
-    list_display_links = ('id', 'house', 'resident')
-    search_fields = ('house__owner__firstName', 'house__owner__lastName', 'house__floorCode', 'house__description', 'house__building__name', 'resident__firstName', 'resident__lastName')
+    list_display = ('id', 'house', 'user', 'isOwner', 'isHead', 'isActive')
+    list_display_links = ('id', 'house', 'user')
+    search_fields = ('house__owner__firstName', 'house__owner__lastName', 'house__floorCode', 'house__description', 'house__building__name', 'user__firstName', 'user__lastName')
     list_per_page = 25
     sortable_by = 'id'
 

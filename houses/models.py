@@ -39,7 +39,7 @@ class Resident(TimeStampedModel):
     isActive = models.BooleanField(default=False)
 
     class Meta:
-        unique_together = ('house', 'resident')
+        unique_together = ('house', 'user')
 
 class HousePenality(TimeStampedModel):
     penality = models.ForeignKey(Penality, on_delete=models.CASCADE)
