@@ -17,7 +17,7 @@ class Committee(models.Model):
 
 class Member(TimeStampedModel):
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="members")
-    user = models.ForeignKey(Resident, on_delete=models.CASCADE)
+    resident = models.ForeignKey(Resident, on_delete=models.CASCADE)
     position = models.CharField(max_length=100, default="Member")
 
 class Rule(TimeStampedModel):

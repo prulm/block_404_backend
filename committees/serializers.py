@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from accounts.serializers import CustomUserSerializer
+from houses.serializers import ResidentSerializer
 from .models import *
 
 class MemberSerializer(serializers.ModelSerializer):
-    user = CustomUserSerializer()
+    resident = ResidentSerializer()
     class Meta:
         model = Member
-        fields = ('id', 'user', 'position')
+        fields = ('id', 'resident', 'position')
 
 class MemberCreateSerializer(serializers.ModelSerializer):
     class Meta:

@@ -9,9 +9,9 @@ class CommitteeAdmin(admin.ModelAdmin):
     sortable_by = 'id'
 
 class MembersAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'committee', 'position')
-    list_display_links = ('id', 'user')
-    search_fields = ('user__firstName', 'user__lastName', 'committee__name', 'position')
+    list_display = ('id', 'resident', 'committee', 'position')
+    list_display_links = ('id', 'resident')
+    search_fields = ('resident__user__firstName', 'resident__user__lastName', 'committee__name', 'position')
     list_per_page = 25
     sortable_by = 'id'
 

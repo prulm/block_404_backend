@@ -32,7 +32,7 @@ class ResidentRegisterView(CreateAPIView):
     serializer_class = ResidentRegisterSerializer
 
     def perform_create(self, serializer):
-        serializer.save(resident=self.request.user)
+        serializer.save(user=self.request.user)
 
     def create(self, request, *args, **kwargs):
          try:
