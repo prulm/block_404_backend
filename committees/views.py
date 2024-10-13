@@ -8,7 +8,5 @@ class CommitteeCreateView(CreateAPIView):
 
 class CommitteeMemberAddView(CreateAPIView):
     permission_classes = (permissions.IsAdminUser, )
-    serializer_class = MemberSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(committee=self.request.data.get('committee'))
+    serializer_class = MemberCreateSerializer
+    

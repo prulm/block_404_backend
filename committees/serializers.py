@@ -8,6 +8,11 @@ class MemberSerializer(serializers.ModelSerializer):
         model = Member
         fields = ('id', 'user', 'position')
 
+class MemberCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = '__all__'
+
 class RuleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rule
