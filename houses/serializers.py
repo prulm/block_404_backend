@@ -3,10 +3,10 @@ from accounts.serializers import CustomUserSerializer
 from .models import *
 
 class ResidentSerializer(serializers.ModelSerializer):
-    resident = CustomUserSerializer()
+    user = CustomUserSerializer()
     class Meta:
         model = Resident
-        exclude = ['house']
+        fields = ('user', 'isOwner', 'isHead', 'isActive')
 
 class ResidentCreateSerializer(serializers.ModelSerializer):
     class Meta:

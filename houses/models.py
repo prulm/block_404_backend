@@ -33,7 +33,7 @@ class HousePicture(TimeStampedModel):
 
 class Resident(TimeStampedModel):
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name="residents")
-    resident = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="residences")
+    user = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="residences")
     isHead = models.BooleanField(default=False)
     isOwner = models.BooleanField(default=False)
     isActive = models.BooleanField(default=False)

@@ -15,7 +15,7 @@ class HouseListView(ListAPIView):
     
     def get_queryset(self):
         user = self.request.user
-        return Building.objects.filter(models.Q(houses__owner = user) | models.Q(houses__residents = user.id)).distinct()
+        return Building.objects.filter(models.Q(houses__owner=user) | models.Q(houses__residents=user.id)).distinct()
     
 class ResidentAddView(CreateAPIView):
     permission_classes = (permissions.IsAdminUser, )
