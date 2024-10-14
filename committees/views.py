@@ -10,6 +10,10 @@ class CommitteeMemberAddView(CreateAPIView):
     permission_classes = (permissions.IsAdminUser, )
     serializer_class = MemberCreateSerializer
 
+    def perform_create(self, serializer):
+        resident_com = Resident.objects.get(user=self.request.data.get('user'))
+        return serializer.save(resident=resident_com)
+
 class CommitteeRuleAddView(CreateAPIView):
     permission_classes = (permissions.IsAdminUser, )
     serializer_class = RuleSerializer

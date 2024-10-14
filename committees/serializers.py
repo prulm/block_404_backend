@@ -11,7 +11,7 @@ class MemberSerializer(serializers.ModelSerializer):
 class MemberCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
-        fields = '__all__'
+        exclude = ['resident']
 
 class RuleSerializer(serializers.ModelSerializer):
     class Meta:
