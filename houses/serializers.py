@@ -6,7 +6,7 @@ class ResidentSerializer(serializers.ModelSerializer):
     user = CustomUserSerializer()
     class Meta:
         model = Resident
-        fields = ('user', 'isOwner', 'isHead', 'isActive')
+        fields = ('isOwner', 'isHead', 'isActive', 'user')
 
 class ResidentCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,3 +25,17 @@ class HouseSerializer(serializers.ModelSerializer):
     class Meta:
         model = House
         fields = ('floor', 'floorCode', 'description', 'bedrooms', 'squareMeter', 'status', 'owner', 'residents')
+
+class HouseGenericSerializer(serializers.ModelSerializer):
+    owner = CustomUserSerializer()
+    class Meta:
+        model = House
+        fields = ('floor', 'floorCode', 'description', 'bedrooms', 'squareMeter', 'status', 'owner')
+
+class ResidentDetailSerializer(serializers.ModelSerializer):
+    user = CustomUserSerializer()
+    house = HouseGenericSerializer()
+
+    class Meta:
+        model = Resident
+        fields = ('isHead', 'isOwner', 'isActive', 'user', 'house')
