@@ -15,4 +15,4 @@ class CommitteeRuleAddView(CreateAPIView):
     serializer_class = RuleSerializer
 
     def perform_create(self, serializer):
-        return serializer.save(committee=self.request.date.get('committee'))
+        return serializer.save(committee=self.request.data.get('committee'))
