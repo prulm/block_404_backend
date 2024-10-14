@@ -20,6 +20,9 @@ class Member(TimeStampedModel):
     resident = models.ForeignKey(Resident, on_delete=models.CASCADE)
     position = models.CharField(max_length=100, default="Member")
 
+    class Meta:
+        unique_together = ('committee','resident')
+
 class Rule(TimeStampedModel):
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="rules")
     rule = models.TextField()
