@@ -22,7 +22,9 @@ class House(TimeStampedModel):
 
     class Meta:
         unique_together = ("building", "floor", "floorCode")
-
+    def __str__(self):
+        return str(self.floor)+self.floorCode
+    
 class HouseAttachment(TimeStampedModel):
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name='house_attachments')
     file = models.FileField(upload_to=f'house/{house}/attachments/')
@@ -40,7 +42,9 @@ class Resident(TimeStampedModel):
 
     class Meta:
         unique_together = ('house', 'user')
-
+    def __str__(self):
+        return str(self.user.phone)
+    
 class HousePenality(TimeStampedModel):
     penality = models.ForeignKey(Penality, on_delete=models.CASCADE)
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name="penalities")

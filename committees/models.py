@@ -14,7 +14,9 @@ class Committee(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='committee')
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
-
+    def __str__(self):
+        return str(self.name)
+    
 class Member(TimeStampedModel):
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="members")
     resident = models.ForeignKey(Resident, on_delete=models.CASCADE)

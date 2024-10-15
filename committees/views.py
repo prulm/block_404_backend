@@ -22,7 +22,7 @@ class CommitteeMemberAddView(CreateAPIView):
          except IntegrityError as err:
              if 'unique constraint' in str(err):
                 return Response(
-                    {'Error': 'Each resident should be unique to a house.'},
+                    {'Error': 'Each member should be unique to a committee.'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
              else:
