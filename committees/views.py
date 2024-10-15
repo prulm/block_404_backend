@@ -1,5 +1,7 @@
+from django.db import IntegrityError
 from rest_framework.generics import CreateAPIView, UpdateAPIView, ListAPIView, RetrieveAPIView
-from rest_framework import permissions
+from rest_framework.response import Response
+from rest_framework import permissions, status
 from .serializers import *
 
 class CommitteeCreateView(CreateAPIView):
@@ -13,6 +15,18 @@ class CommitteeMemberAddView(CreateAPIView):
     def perform_create(self, serializer):
         resident_com = Resident.objects.get(user=self.request.data.get('user'))
         return serializer.save(resident=resident_com)
+    
+    def create(self, request, *args, **kwargs):
+         try:
+             return super().create(request, *args, **kwargs)
+         except IntegrityError as err:
+             if 'unique constraint' in str(err):
+                return Response(
+                    {'Error': 'Each resident should be unique to a house.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+             else:
+                raise IntegrityError(err)
 
 class CommitteeRuleAddView(CreateAPIView):
     permission_classes = (permissions.IsAdminUser, )
