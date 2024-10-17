@@ -18,6 +18,11 @@ class ResidentRegisterSerializer(serializers.ModelSerializer):
         model = Resident
         exclude = ['user']
 
+class HouseCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = House
+        fields = '__all__'
+
 class HouseSerializer(serializers.ModelSerializer):
     residents = ResidentSerializer(many=True)
     owner = CustomUserSerializer()
