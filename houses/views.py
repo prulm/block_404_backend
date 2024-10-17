@@ -7,7 +7,7 @@ from .serializers import *
 
 class HouseCreateView(CreateAPIView):
     permission_classes = (permissions.IsAdminUser, )
-    serializer_class = HouseSerializer
+    serializer_class = HouseCreateSerializer
 
 class HouseListView(ListAPIView):
     permission_classes = (permissions.IsAuthenticated, )
