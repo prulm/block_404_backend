@@ -33,5 +33,5 @@ class BuildingDetailSerializer(serializers.ModelSerializer):
     
     def get_houses(self, obj):
         user = self.context['request'].user
-        user_houses = obj.houses.filter(models.Q(owner=user) | models.Q(residents=user.id))
+        user_houses = obj.houses.filter(models.Q(owner=user) | models.Q(residents__user=user))
         return HouseSerializer(user_houses, many=True).data
