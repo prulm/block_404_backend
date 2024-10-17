@@ -12,10 +12,9 @@ class HouseCreateView(CreateAPIView):
 class HouseListView(ListAPIView):
     permission_classes = (permissions.IsAuthenticated, )
     serializer_class = BuildingDetailSerializer
-    
     def get_queryset(self):
         user = self.request.user
-        return Building.objects.filter(models.Q(houses__owner=user) | models.Q(houses__residents=user.id)).distinct()
+        return Building.objects.filter(models.Q(houses__owner=user) | models.Q(houses__residents__user=user)).distinct()
     
 class ResidentAddView(CreateAPIView):
     permission_classes = (permissions.IsAdminUser, )
