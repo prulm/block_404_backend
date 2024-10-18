@@ -40,22 +40,3 @@ class Event(TimeStampedModel):
     commences = models.DateTimeField()
     penality = models.ForeignKey(Penality, on_delete=models.CASCADE, null=True, blank=True)
     attachment = models.FileField(upload_to=f'building/{building.name}/events/attachments/')
-
-class Payment(TimeStampedModel):
-
-    class PaymentTypes(models.TextChoices):
-        Power = 'Power', 'POWER'
-        Water = 'Water', 'WATER'
-        Other = 'Other', 'OTHER'
-
-    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='payments')
-    collector = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name='payments_to_collect')
-    type = models.CharField(max_length=50, choices=PaymentTypes.choices, default=PaymentTypes.Other)
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    deadline = models.DateTimeField()
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    isRecurring = models.BooleanField(default=False)
-    recurrence_period = models.IntegerField(null=True, blank=True)
-    penality = models.ForeignKey(Penality, on_delete=models.CASCADE, null=True, blank=True)
-    attachment = models.FileField(upload_to=f'building/{building.name}/payments/attachments/', null=True, blank=True)
