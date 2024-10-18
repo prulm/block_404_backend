@@ -30,7 +30,10 @@ class HousePayment(TimeStampedModel):
     
     @property
     def total_paid(self):
-        return self.aggregate(total=models.Sum('amount'))['total'] or 0
+        return HousePayment.objects.filter(
+            house=self.house, 
+            payment=self.payment
+            ).aggregate(total=models.Sum('amount'))['total'] or 0
 
     @property
     def payment_progress(self):
