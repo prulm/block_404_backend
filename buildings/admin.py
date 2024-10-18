@@ -29,13 +29,6 @@ class EventAdmin(admin.ModelAdmin):
 	list_per_page = 25
 	sortable_by = 'id'
 
-class PaymentAdmin(admin.ModelAdmin):
-	list_display = ('id', 'name', 'description', 'building', 'collector', 'type', 'deadline', 'amount', 'isRecurring', 'recurrence_period', 'penality', 'attachment')
-	list_display_links = ('id', 'building', 'name', 'collector')
-	search_fields = ('building__name', 'collector__firstName', 'collector__lastName', 'name')
-	list_per_page = 25
-	sortable_by = 'id'
-
 class PenalityAdmin(admin.ModelAdmin):
 	list_display = ('id', 'building', 'reason', 'amount')
 	list_display_links = ('id', 'building')
@@ -47,5 +40,4 @@ admin.site.register(Building, BuildingAdmin)
 admin.site.register(BuildingAttachment, BuildingAttachmentAdmin)
 admin.site.register(BuildingPicture, BuildingPictureAdmin)
 admin.site.register(Event, EventAdmin)
-admin.site.register(Payment, PaymentAdmin)
 admin.site.register(Penality, PenalityAdmin)

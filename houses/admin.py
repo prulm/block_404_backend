@@ -29,13 +29,6 @@ class ResidentAdmin(admin.ModelAdmin):
     list_per_page = 25
     sortable_by = 'id'
 
-class HousePaymentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'house', 'amount', 'paid_by')
-    list_display_links = ('id', 'house')
-    search_fields = ('house__owner__firstName', 'house__owner__lastName', 'house__floorCode', 'house__description', 'house__building__name', 'amount', 'paid_by__firstName', 'paid_by__lastName')
-    list_per_page = 25
-    sortable_by = 'id'
-
 class HousePenalityAdmin(admin.ModelAdmin):
     list_display = ('id', 'house', 'penality', 'is_paid')
     list_display_links = ('id', 'house')
@@ -47,5 +40,4 @@ admin.site.register(House, HouseAdmin)
 admin.site.register(HouseAttachment, HouseAttachmentAdmin)
 admin.site.register(HousePicture, HousePictureAdmin)
 admin.site.register(Resident, ResidentAdmin)
-admin.site.register(HousePayment, HousePaymentAdmin)
 admin.site.register(HousePenality, HousePenalityAdmin)
