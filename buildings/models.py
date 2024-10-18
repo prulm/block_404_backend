@@ -49,7 +49,7 @@ class Payment(TimeStampedModel):
         Water = 'Water', 'WATER'
         Other = 'Other', 'OTHER'
 
-    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='payments')
     collector = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     type = models.CharField(max_length=50, choices=PaymentTypes.choices, default=PaymentTypes.Other)
     name = models.CharField(max_length=255)
