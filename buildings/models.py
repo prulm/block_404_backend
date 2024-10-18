@@ -59,4 +59,4 @@ class Payment(TimeStampedModel):
     isRecurring = models.BooleanField(default=False)
     recurrence_period = models.IntegerField(null=True, blank=True)
     penality = models.ForeignKey(Penality, on_delete=models.CASCADE, null=True, blank=True)
-    attachment = models.FileField(upload_to=f'building/{building.name}/payments/attachments/')
+    attachment = models.FileField(upload_to=f'building/{building.name}/payments/attachments/', null=True, blank=True)
