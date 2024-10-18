@@ -28,7 +28,6 @@ class BuildingPicture(TimeStampedModel):
     picture = models.ImageField(upload_to=f"building/{building.name}/pictures/")
 
 class Penality(TimeStampedModel):
-    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='penalities')
     reason = models.TextField()
     amount = models.IntegerField()
 

@@ -15,6 +15,11 @@ class AttachmentsSerializer(serializers.ModelSerializer):
         model = BuildingAttachment
         fields = ('id', 'file')
 
+class PenalitySerialier(serializers.ModelSerializer):
+    class Meta:
+        model = Penality
+        fields = '__all__'
+
 class PicturesSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuildingPicture

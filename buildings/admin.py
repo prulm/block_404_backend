@@ -30,9 +30,9 @@ class EventAdmin(admin.ModelAdmin):
 	sortable_by = 'id'
 
 class PenalityAdmin(admin.ModelAdmin):
-	list_display = ('id', 'building', 'reason', 'amount')
-	list_display_links = ('id', 'building')
-	search_fields = ('building__name','reason')
+	list_display = ('id', 'reason', 'amount')
+	list_display_links = ('id', )
+	search_fields = ('reason', )
 	list_per_page = 25
 	sortable_by = 'id'
 
