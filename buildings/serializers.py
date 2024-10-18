@@ -28,7 +28,6 @@ class PicturesSerializer(serializers.ModelSerializer):
 class BuildingDetailSerializer(serializers.ModelSerializer):
     pictures = PicturesSerializer(many=True)
     attachments =  AttachmentsSerializer(many=True)
-    payments = PaymentSerializer(many=True)
     committee = CommitteeSerializer(many=True)
     houses = serializers.SerializerMethodField()
 

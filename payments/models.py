@@ -24,7 +24,7 @@ class Payment(TimeStampedModel):
 
 class HousePayment(TimeStampedModel):
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
-    house = models.ForeignKey(House, on_delete=models.CASCADE, related_name="payments")
+    house = models.ForeignKey(House, on_delete=models.CASCADE, related_name="house_payments")
     paid_by = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name="completed_payments")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     
