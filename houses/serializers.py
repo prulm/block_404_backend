@@ -23,14 +23,6 @@ class HouseCreateSerializer(serializers.ModelSerializer):
         model = House
         fields = '__all__'
 
-class HouseSerializer(serializers.ModelSerializer):
-    residents = ResidentSerializer(many=True)
-    owner = CustomUserSerializer()
-
-    class Meta:
-        model = House
-        fields = ('floor', 'floorCode', 'description', 'bedrooms', 'squareMeter', 'status', 'owner', 'residents')
-
 class HouseGenericSerializer(serializers.ModelSerializer):
     owner = CustomUserSerializer()
     class Meta:

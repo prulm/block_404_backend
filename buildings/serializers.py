@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from committees.serializers import CommitteeSerializer
-from houses.serializers import HouseSerializer
-from payments.serializers import PaymentSerializer
+from payments.serializers import HouseSerializer
 from .models import *
 
 class BuildingSerializer(serializers.ModelSerializer):
