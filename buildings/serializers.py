@@ -20,16 +20,19 @@ class PicturesSerializer(serializers.ModelSerializer):
         fields = ('id', 'picture')
 
 class PaymentSerializer(serializers.ModelSerializer):
-    pass
+    class Meta:
+        model = Payment
+        exclude = ('building')
 
 class BuildingDetailSerializer(serializers.ModelSerializer):
     pictures = PicturesSerializer(many=True)
     attachments =  AttachmentsSerializer(many=True)
+    payments = PaymentSerializer(many=True)
     committee = CommitteeSerializer(many=True)
     houses = serializers.SerializerMethodField()
 
     class Meta(BuildingSerializer.Meta):
-        fields = ('id', 'name', 'description', 'housesPerFloor', 'floors', 'address', 'attachments', 'pictures', 'committee', 'houses')
+        fields = ('id', 'name', 'description', 'housesPerFloor', 'floors', 'address', 'attachments', 'pictures', 'payments', 'committee', 'houses')
     
     def get_houses(self, obj):
         user = self.context['request'].user
