@@ -30,3 +30,8 @@ class HouseSerializer(serializers.ModelSerializer):
     class Meta:
         model = House
         fields = ('floor', 'floorCode', 'description', 'bedrooms', 'squareMeter', 'status', 'owner', 'residents', 'house_payments')
+
+class PaymentCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Payment
+        fields = '__all__'
