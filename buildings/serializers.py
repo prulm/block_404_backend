@@ -19,11 +19,6 @@ class PicturesSerializer(serializers.ModelSerializer):
         model = BuildingPicture
         fields = ('id', 'picture')
 
-class PaymentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Payment
-        exclude = ('building')
-
 class BuildingDetailSerializer(serializers.ModelSerializer):
     pictures = PicturesSerializer(many=True)
     attachments =  AttachmentsSerializer(many=True)
