@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework.generics import  ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework import permissions
+from .models import *
+from .serializers import *
 
-# Create your views here.
+class PaymentCreateView(CreateAPIView):
+    permission_classes = (permissions.IsAdminUser, )
+    serializer_class = PaymentCreateSerializer
