@@ -16,7 +16,7 @@ class Payment(TimeStampedModel):
     name = models.CharField(max_length=255)
     description = models.TextField()
     deadline = models.DateTimeField()
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=5 if type=='Water' else 525)
     isRecurring = models.BooleanField(default=False)
     recurrence_period = models.IntegerField(null=True, blank=True)
     penality = models.ForeignKey(Penality, on_delete=models.CASCADE, null=True, blank=True)

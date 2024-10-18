@@ -20,3 +20,4 @@ class HousePaymentSerializer(serializers.ModelSerializer):
     paid_by = ResidentDetailSerializer()
     class Meta:
         model = HousePayment
+        fields = ( 'payment', 'paid_by', 'amount', 'total_paid', 'payment_progress')
