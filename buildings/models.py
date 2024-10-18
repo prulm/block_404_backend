@@ -1,6 +1,5 @@
 from django.db import models
 from accounts.models import UserAccount
-from houses.models import Resident
 
 class TimeStampedModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -50,7 +49,7 @@ class Payment(TimeStampedModel):
         Other = 'Other', 'OTHER'
 
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='payments')
-    collector = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='payments_to_collect')
+    collector = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name='payments_to_collect')
     type = models.CharField(max_length=50, choices=PaymentTypes.choices, default=PaymentTypes.Other)
     name = models.CharField(max_length=255)
     description = models.TextField()
