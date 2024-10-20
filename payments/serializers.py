@@ -35,3 +35,8 @@ class PaymentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
         fields = '__all__'
+
+class BuildingExpenseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BuildingExpense
+        fields = '__all__'
