@@ -2,6 +2,11 @@ from django.db import models
 from buildings.models import TimeStampedModel, Building, Penality
 from houses.models import House, Resident
 
+class BuildingExpense(TimeStampedModel):
+    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+    amount = models.DecimalField(decimal_places=2,  max_digits=10)
+    description = models.TextField()
+
 
 class Payment(TimeStampedModel):
 
