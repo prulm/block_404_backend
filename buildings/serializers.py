@@ -34,7 +34,7 @@ class BuildingDetailSerializer(serializers.ModelSerializer):
     attachments =  AttachmentsSerializer(many=True)
     committee = CommitteeSerializer(many=True)
     houses = serializers.SerializerMethodField()
-
+    events = EventSerializer(many=True)
     class Meta(BuildingSerializer.Meta):
         fields = ('id', 'name', 'description', 'housesPerFloor', 'floors', 'address', 'attachments', 'pictures', 'payments', 'committee', 'houses')
     

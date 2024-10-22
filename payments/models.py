@@ -2,11 +2,19 @@ from django.db import models
 from buildings.models import TimeStampedModel, Building, Penality
 from houses.models import House, Resident
 
+class Event(TimeStampedModel):
+    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='events')
+    creator = models.ForeignKey(Resident, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    commences = models.DateTimeField()
+    penality = models.ForeignKey(Penality, on_delete=models.CASCADE, null=True, blank=True)
+    attachment = models.FileField(upload_to=f'building/{building.name}/events/attachments/')
+
 class BuildingExpense(TimeStampedModel):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     amount = models.DecimalField(decimal_places=2,  max_digits=10)
     description = models.TextField()
-
 
 class Payment(TimeStampedModel):
 

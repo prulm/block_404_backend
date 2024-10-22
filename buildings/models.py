@@ -30,12 +30,3 @@ class BuildingPicture(TimeStampedModel):
 class Penality(TimeStampedModel):
     reason = models.TextField()
     amount = models.IntegerField()
-
-class Event(TimeStampedModel):
-    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='events')
-    creator = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
-    commences = models.DateTimeField()
-    penality = models.ForeignKey(Penality, on_delete=models.CASCADE, null=True, blank=True)
-    attachment = models.FileField(upload_to=f'building/{building.name}/events/attachments/')
