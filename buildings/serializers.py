@@ -24,6 +24,11 @@ class PicturesSerializer(serializers.ModelSerializer):
         model = BuildingPicture
         fields = ('id', 'picture')
 
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        exclude = ('building')
+
 class BuildingDetailSerializer(serializers.ModelSerializer):
     pictures = PicturesSerializer(many=True)
     attachments =  AttachmentsSerializer(many=True)
