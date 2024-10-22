@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from committees.serializers import CommitteeSerializer
-from payments.serializers import HouseSerializer
+from payments.serializers import *
 from .models import *
 
 class BuildingSerializer(serializers.ModelSerializer):
@@ -23,11 +23,6 @@ class PicturesSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuildingPicture
         fields = ('id', 'picture')
-
-class EventSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Event
-        exclude = ('building')
 
 class BuildingDetailSerializer(serializers.ModelSerializer):
     pictures = PicturesSerializer(many=True)

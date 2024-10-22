@@ -40,3 +40,8 @@ class BuildingExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuildingExpense
         fields = '__all__'
+
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        exclude = ('building')
