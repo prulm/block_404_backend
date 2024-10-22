@@ -22,12 +22,6 @@ class BuildingPictureAdmin(admin.ModelAdmin):
 	list_per_page = 25
 	sortable_by = 'id'
 
-class EventAdmin(admin.ModelAdmin):
-	list_display = ('id', 'building', 'creator', 'name', 'description', 'commences', 'penality', 'attachment')
-	list_display_links = ('id', 'building', 'name', 'creator')
-	search_fields = ('building__name', 'creator__firstName', 'creator__lastName', 'name')
-	list_per_page = 25
-	sortable_by = 'id'
 
 class PenalityAdmin(admin.ModelAdmin):
 	list_display = ('id', 'reason', 'amount')
@@ -39,5 +33,4 @@ class PenalityAdmin(admin.ModelAdmin):
 admin.site.register(Building, BuildingAdmin)
 admin.site.register(BuildingAttachment, BuildingAttachmentAdmin)
 admin.site.register(BuildingPicture, BuildingPictureAdmin)
-admin.site.register(Event, EventAdmin)
 admin.site.register(Penality, PenalityAdmin)
