@@ -6,3 +6,7 @@ from .serializers import *
 class PaymentCreateView(CreateAPIView):
     permission_classes = (permissions.IsAdminUser, )
     serializer_class = PaymentCreateSerializer
+
+class EventCreateView(CreateAPIView):
+    permission_classes = (permissions.IsAuthenticated, )
+    serializer_class = EventCreateSerializer
