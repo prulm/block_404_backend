@@ -40,6 +40,7 @@ class HousePayment(TimeStampedModel):
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name="house_payments")
     paid_by = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name="completed_payments")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
+    verified = models.BooleanField(default=False)
     
     @property
     def total_paid(self):
