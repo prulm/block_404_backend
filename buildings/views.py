@@ -31,3 +31,8 @@ class BuildingCreateView(CreateAPIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         building_serialized = model_to_dict(Building.objects.last())
         return Response(building_serialized, status=status.HTTP_201_CREATED)
+    
+class BuildingListView(ListAPIView):
+    permission_classes = (permissions.IsAuthenticated, )
+    serializer_class =  BuildingSerializer
+    queryset = Building.objects.all()
