@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'committees',
     'houses',
     'payments',
+    'location_field.apps.DefaultConfig',
 ]
 
 MIDDLEWARE = [
