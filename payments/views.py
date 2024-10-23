@@ -10,7 +10,9 @@ class PaymentCreateView(CreateAPIView):
 class PaymentListView(ListAPIView):
     permission_classes = (permissions.IsAuthenticated, )
     serializer_class = PaymentCreateSerializer
-    query_set = Payment.objects.all()
+    
+    def get_queryset(self):
+        return Payment.objects.filter(building=self.kwargs['pk'])
 
 class EventCreateView(CreateAPIView):
     permission_classes = (permissions.IsAuthenticated, )
