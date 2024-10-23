@@ -42,6 +42,11 @@ class BuildingExpenseSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class EventSerializer(serializers.ModelSerializer):
+    creator = ResidentSerializer()
     class Meta:
         model = Event
         exclude = ('building')
+
+class EventCreateSerializer(serializers.ModelSerializer):
+    class Meta(EventSerializer.Meta):
+        fields = '__all__'
