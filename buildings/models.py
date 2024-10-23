@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import UserAccount
+from location_field.models.plain import PlainLocationField
 
 class TimeStampedModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -13,7 +13,7 @@ class Building(TimeStampedModel):
     description = models.TextField(blank=True, null=True)
     housesPerFloor = models.IntegerField()
     floors = models.IntegerField()
-    address = models.CharField(max_length=255)
+    location = PlainLocationField(zoom=8)
 
     @property
     def houses(self):

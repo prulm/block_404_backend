@@ -113,6 +113,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOCATION_FIELD = {
+    'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
+    'provider.google.api_key': os.getenv("GOOGLE_API_KEY"),
+    'provider.google.api_libraries': '',
+    'provider.google.map.type': 'ROADMAP',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
