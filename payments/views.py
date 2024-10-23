@@ -14,6 +14,10 @@ class PaymentListView(ListAPIView):
     def get_queryset(self):
         return Payment.objects.filter(building=self.kwargs['pk'])
 
+class HousePaymentCreateView(CreateAPIView):
+    permission_classes = (permissions.IsAuthenticated, )
+    serializer_class = HousePaymentCreateSerializer()
+
 class EventCreateView(CreateAPIView):
     permission_classes = (permissions.IsAuthenticated, )
     serializer_class = EventCreateSerializer
