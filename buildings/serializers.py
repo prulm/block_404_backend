@@ -31,7 +31,7 @@ class BuildingDetailSerializer(serializers.ModelSerializer):
     houses = serializers.SerializerMethodField()
     events = EventSerializer(many=True)
     class Meta(BuildingSerializer.Meta):
-        fields = ('id', 'name', 'description', 'housesPerFloor', 'floors', 'address', 'attachments', 'pictures', 'payments', 'committee', 'houses')
+        fields = ('id', 'name', 'description', 'housesPerFloor', 'floors', 'location', 'attachments', 'pictures', 'payments', 'committee', 'houses')
     
     def get_houses(self, obj):
         user = self.context['request'].user
