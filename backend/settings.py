@@ -117,7 +117,7 @@ LOCATION_FIELD = {
     'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
     'provider.google.api_key': os.getenv("GOOGLE_API_KEY"),
     'provider.google.api_libraries': '',
-    'provider.google.map.type': 'SATELLITE',
+    'provider.google.map.type': 'satellite',
 }
 
 # Internationalization

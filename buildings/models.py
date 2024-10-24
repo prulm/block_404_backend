@@ -13,7 +13,7 @@ class Building(TimeStampedModel):
     description = models.TextField(blank=True, null=True)
     housesPerFloor = models.IntegerField()
     floors = models.IntegerField()
-    location = PlainLocationField(zoom=50)
+    location = PlainLocationField(zoom=18)
 
     @property
     def houses(self):
