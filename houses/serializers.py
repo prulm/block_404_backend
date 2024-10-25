@@ -39,7 +39,7 @@ class HouseGenericSerializer(serializers.ModelSerializer):
     house_pictures = HousePictureSerializer(many=True)
     class Meta:
         model = House
-        fields = ('floor', 'floorCode', 'description', 'bedrooms', 'squareMeter', 'status', 'house_attachments', 'house_pictures' 'owner')
+        fields = ('floor', 'floorCode', 'description', 'bedrooms', 'squareMeter', 'status', 'house_attachments', 'house_pictures', 'owner')
 
 class ResidentDetailSerializer(serializers.ModelSerializer):
     user = CustomUserSerializer()
