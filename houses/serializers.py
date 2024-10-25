@@ -18,12 +18,12 @@ class ResidentRegisterSerializer(serializers.ModelSerializer):
         model = Resident
         exclude = ['user']
 
-class HouseAttachmentSerializer(serializers.ModelSeralizer):
+class HouseAttachmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = HouseAttachment
         fields = '__all__'
 
-class HousePictureSerializer(serializers.ModelSeralizer):
+class HousePictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = HousePicture
         fields = '__all__'
