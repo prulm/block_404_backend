@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from accounts.serializers import CustomUserSerializer
-from houses.serializers import ResidentDetailSerializer, ResidentSerializer
+from houses.serializers import *
 from .models import *
 
 class PenalitySerializer(serializers.ModelSerializer):
@@ -32,9 +32,11 @@ class HouseSerializer(serializers.ModelSerializer):
     residents = ResidentSerializer(many=True)
     owner = CustomUserSerializer()
     house_payments = HousePaymentSerializer(many=True)
+    house_attachments = HouseAttachmentSerializer(many=True)
+    house_pictures = HousePictureSerializer(many=True)
     class Meta:
         model = House
-        fields = ('floor', 'floorCode', 'description', 'bedrooms', 'squareMeter', 'status', 'owner', 'residents', 'house_payments')
+        fields = ('floor', 'floorCode', 'description', 'bedrooms', 'squareMeter', 'status', 'house_attachments', 'house_pictures', 'owner', 'residents', 'house_payments')
 
 class PaymentCreateSerializer(serializers.ModelSerializer):
     class Meta:
