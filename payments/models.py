@@ -2,6 +2,10 @@ from django.db import models
 from buildings.models import TimeStampedModel, Building, Penality
 from houses.models import House, Resident
 
+def bill_upload_path(instance, filename):
+    building_name = instance.house.building.name
+    return f'building/{building_name}/payments/bills/{filename}'
+
 class Event(TimeStampedModel):
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='events')
     creator = models.ForeignKey(Resident, on_delete=models.CASCADE)
@@ -40,6 +44,7 @@ class HousePayment(TimeStampedModel):
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name="house_payments")
     paid_by = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name="completed_payments")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
+    bill = models.FileField(upload_to=bill_upload_path, null=True, blank=True)
     verified = models.BooleanField(default=False)
     
     @property
